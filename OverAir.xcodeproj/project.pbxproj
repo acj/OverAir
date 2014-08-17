@@ -12,6 +12,8 @@
 		645C129B19A13A4C00CF23B3 /* OverAirTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 645C129A19A13A4C00CF23B3 /* OverAirTests.m */; };
 		645C12AA19A13B3900CF23B3 /* Constants.h in Headers */ = {isa = PBXBuildFile; fileRef = 645C12A819A13B3900CF23B3 /* Constants.h */; };
 		645C12AB19A13B3900CF23B3 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 645C12A919A13B3900CF23B3 /* Constants.m */; };
+		645C12B619A140C500CF23B3 /* Util.h in Headers */ = {isa = PBXBuildFile; fileRef = 645C12B419A140C500CF23B3 /* Util.h */; };
+		645C12B719A140C500CF23B3 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 645C12B519A140C500CF23B3 /* Util.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +35,8 @@
 		645C129A19A13A4C00CF23B3 /* OverAirTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OverAirTests.m; sourceTree = "<group>"; };
 		645C12A819A13B3900CF23B3 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		645C12A919A13B3900CF23B3 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		645C12B419A140C500CF23B3 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
+		645C12B519A140C500CF23B3 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,8 @@
 				645C128B19A13A4C00CF23B3 /* Supporting Files */,
 				645C12A819A13B3900CF23B3 /* Constants.h */,
 				645C12A919A13B3900CF23B3 /* Constants.m */,
+				645C12B419A140C500CF23B3 /* Util.h */,
+				645C12B519A140C500CF23B3 /* Util.m */,
 			);
 			path = OverAir;
 			sourceTree = "<group>";
@@ -115,6 +121,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				645C12B619A140C500CF23B3 /* Util.h in Headers */,
 				645C12AA19A13B3900CF23B3 /* Constants.h in Headers */,
 				645C128E19A13A4C00CF23B3 /* OverAir.h in Headers */,
 			);
@@ -217,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				645C12AB19A13B3900CF23B3 /* Constants.m in Sources */,
+				645C12B719A140C500CF23B3 /* Util.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
