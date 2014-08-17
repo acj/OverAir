@@ -161,3 +161,13 @@
 // response [headers] itself.
 
 @end
+
+@protocol AirPlayServerDelegate
+- (float)airPlayServerDidReceivePositionRequest:(AirPlayServer*)server;
+- (float)airPlayServerDidReceiveRateRequest:(AirPlayServer*)server;
+- (void)airPlayServerDidReceiveStopRequest:(AirPlayServer*)server;
+- (void)airPlayServer:(AirPlayServer*)server didReceivePauseRequest:(BOOL)pause;
+- (void)airPlayServer:(AirPlayServer*)server didReceiveScrubRequest:(float)seconds;
+- (void)airPlayServer:(AirPlayServer*)server didReceiveRequestForVideoURL:(NSString*)url startPosition:(float)start;
+- (void)airPlayServer:(AirPlayServer*)server didReceivePhotoRequest:(NSData*)photo;
+@end
