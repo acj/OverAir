@@ -14,6 +14,8 @@
 		645C12AB19A13B3900CF23B3 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 645C12A919A13B3900CF23B3 /* Constants.m */; };
 		645C12AE19A13CA000CF23B3 /* TCPServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 645C12AC19A13CA000CF23B3 /* TCPServer.h */; };
 		645C12AF19A13CA000CF23B3 /* TCPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 645C12AD19A13CA000CF23B3 /* TCPServer.m */; };
+		645C12B219A13F2200CF23B3 /* AirPlayServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 645C12B019A13F2200CF23B3 /* AirPlayServer.h */; };
+		645C12B319A13F2200CF23B3 /* AirPlayServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 645C12B119A13F2200CF23B3 /* AirPlayServer.m */; };
 		645C12B619A140C500CF23B3 /* Util.h in Headers */ = {isa = PBXBuildFile; fileRef = 645C12B419A140C500CF23B3 /* Util.h */; };
 		645C12B719A140C500CF23B3 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 645C12B519A140C500CF23B3 /* Util.m */; };
 /* End PBXBuildFile section */
@@ -39,6 +41,8 @@
 		645C12A919A13B3900CF23B3 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		645C12AC19A13CA000CF23B3 /* TCPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPServer.h; sourceTree = "<group>"; };
 		645C12AD19A13CA000CF23B3 /* TCPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPServer.m; sourceTree = "<group>"; };
+		645C12B019A13F2200CF23B3 /* AirPlayServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirPlayServer.h; sourceTree = "<group>"; };
+		645C12B119A13F2200CF23B3 /* AirPlayServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirPlayServer.m; sourceTree = "<group>"; };
 		645C12B419A140C500CF23B3 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		645C12B519A140C500CF23B3 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -89,6 +93,8 @@
 				645C12A919A13B3900CF23B3 /* Constants.m */,
 				645C12AC19A13CA000CF23B3 /* TCPServer.h */,
 				645C12AD19A13CA000CF23B3 /* TCPServer.m */,
+				645C12B019A13F2200CF23B3 /* AirPlayServer.h */,
+				645C12B119A13F2200CF23B3 /* AirPlayServer.m */,
 				645C12B419A140C500CF23B3 /* Util.h */,
 				645C12B519A140C500CF23B3 /* Util.m */,
 			);
@@ -130,6 +136,7 @@
 				645C12B619A140C500CF23B3 /* Util.h in Headers */,
 				645C12AA19A13B3900CF23B3 /* Constants.h in Headers */,
 				645C12AE19A13CA000CF23B3 /* TCPServer.h in Headers */,
+				645C12B219A13F2200CF23B3 /* AirPlayServer.h in Headers */,
 				645C128E19A13A4C00CF23B3 /* OverAir.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -230,6 +237,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				645C12B319A13F2200CF23B3 /* AirPlayServer.m in Sources */,
 				645C12AF19A13CA000CF23B3 /* TCPServer.m in Sources */,
 				645C12AB19A13B3900CF23B3 /* Constants.m in Sources */,
 				645C12B719A140C500CF23B3 /* Util.m in Sources */,
