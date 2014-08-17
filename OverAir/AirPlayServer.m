@@ -409,12 +409,12 @@
         else if ([[uri relativeString] hasPrefix:@"/playback-info"])
         {
             
-            if (delegate && [delegate respondsToSelector:@selector(airplayDidAskPosition)]) {
-                _playPosition =  [delegate airplayDidAskPosition];
+            if (delegate && [delegate respondsToSelector:@selector(airPlayServerDidReceivePositionRequest:)]) {
+                _playPosition =  [delegate airPlayServerDidReceivePositionRequest:self.server];
             }
             
-            if (delegate && [delegate respondsToSelector:@selector(airplayDidAskRate)]) {
-                _playRate =  [delegate airplayDidAskRate];
+            if (delegate && [delegate respondsToSelector:@selector(airPlayServerDidReceiveRateRequest:)]) {
+                _playRate =  [delegate airPlayServerDidReceiveRateRequest:self.server];
             }
             
             NSString *resp = [NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n \
@@ -492,11 +492,16 @@
                 NSNumber * startposition = [f numberFromString:[components objectAtIndex:1]];
                 
                 
-                if (delegate && [delegate respondsToSelector:@selector(videoSent:startPosition:)]) {
-                    [delegate videoSent:[[components objectAtIndex:0] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]] startPosition:[startposition floatValue]];
+                if (delegate && [delegate respondsToSelector:@selector(airPlayServer:didReceiveRequestForVideoURL:startPosition:)]) {
+                    NSString* const videoUrl = [[components objectAtIndex:0] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+                    
+                    [delegate airPlayServer:self.server
+               didReceiveRequestForVideoURL:videoUrl
+                              startPosition:[startposition floatValue]];
                 }
-                if (delegate && [delegate respondsToSelector:@selector(videoDidPauseOrPlay:)]) {
-                    [delegate videoDidPauseOrPlay:FALSE];
+                
+                if (delegate && [delegate respondsToSelector:@selector(airPlayServer:didReceivePauseRequest:)]) {
+                    [delegate airPlayServer:self.server didReceivePauseRequest:YES];
                 }
                 
             }
@@ -509,8 +514,12 @@
                     NSLog(@"Error: %@",error);
                 }
                 else {
-                    if (delegate && [delegate respondsToSelector:@selector(videoSent:startPosition:)]) {
-                        [delegate videoSent:[[plist objectForKey:@"Content-Location"] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]] startPosition:[[plist objectForKey:@"Start-Position"] floatValue]];
+                    if (delegate && [delegate respondsToSelector:@selector(airPlayServer:didReceiveRequestForVideoURL:startPosition:)]) {
+                        NSString* const videoUrl = [[plist objectForKey:@"Content-Location"] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+                        
+                        [delegate airPlayServer:self.server
+                   didReceiveRequestForVideoURL:videoUrl
+                                  startPosition:[[plist objectForKey:@"Start-Position"] floatValue]];
                     }
                     
                 }
@@ -533,13 +542,9 @@
         }
         else if ([[uri relativeString] hasPrefix:@"/stop"])
         {
-            
-            
-            
-            if (delegate && [delegate respondsToSelector:@selector(videoClosed)]) {
-                [delegate videoClosed];
-            }
-            
+            if (delegate && [delegate respondsToSelector:@selector(airPlayServerDidReceiveStopRequest:)]) {
+                [delegate airPlayServerDidReceiveStopRequest:self.server];
+            }   
             
             CFHTTPMessageRef response = CFHTTPMessageCreateResponse(kCFAllocatorDefault, 200, NULL, kCFHTTPVersion1_1); // OK
             [mess setResponse:response];
@@ -554,13 +559,13 @@
             
             if ([[uri relativeString] hasPrefix:@"/rate?value=1"])
             {
-                if (delegate && [delegate respondsToSelector:@selector(videoDidPauseOrPlay:)]) {
-                    [delegate videoDidPauseOrPlay:FALSE];
+                if (delegate && [delegate respondsToSelector:@selector(airPlayServer:didReceivePauseRequest:)]) {
+                    [delegate airPlayServer:self.server didReceivePauseRequest:NO];
                 }
             }
             else {
-                if (delegate && [delegate respondsToSelector:@selector(videoDidPauseOrPlay:)]) {
-                    [delegate videoDidPauseOrPlay:TRUE];
+                if (delegate && [delegate respondsToSelector:@selector(airPlayServer:didReceivePauseRequest:)]) {
+                    [delegate airPlayServer:self.server didReceivePauseRequest:YES];
                 }
             }
             
@@ -588,8 +593,8 @@
             
             _playPosition = [position intValue]/1000000;
             
-            if (delegate && [delegate respondsToSelector:@selector(videoDidScrubTo:)]) { 
-                [delegate videoDidScrubTo:[position floatValue]];
+            if (delegate && [delegate respondsToSelector:@selector(airPlayServer:didReceiveScrubRequest:)]) {
+                [delegate airPlayServer:self.server didReceiveScrubRequest:[position floatValue]];
             }					
             
             
@@ -612,9 +617,9 @@
             
             NSData *Body = (__bridge NSData *)CFHTTPMessageCopyBody(request);
             
-            if (delegate && [delegate respondsToSelector:@selector(photoSent:)]) { 
-                [delegate photoSent:Body];
-            }					
+            if (delegate && [delegate respondsToSelector:@selector(airPlayServer:didReceivePhotoRequest:)]) {
+                [delegate airPlayServer:self.server didReceivePhotoRequest:Body];
+            }
             
         }
         else if ([[uri relativeString] hasPrefix:@"/slideshows"])

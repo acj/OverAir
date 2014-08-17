@@ -116,15 +116,6 @@
 - (void)HTTPConnection:(HTTPConnection *)conn didReceiveRequest:(HTTPServerRequest *)mess;
 - (void)HTTPConnection:(HTTPConnection *)conn didSendResponse:(HTTPServerRequest *)mess;
 
-- (void)videoSent:(NSString*)url startPosition:(float)start;
-- (void)videoClosed;
-- (void)videoDidPauseOrPlay:(BOOL)pause;
-- (void)videoDidScrubTo:(float)seconds;
-- (void)photoSent:(NSData*)photoData;
-
-- (float)airplayDidAskPosition;
-- (float)airplayDidAskRate;
-
 // The "didReceiveRequest:" is the most interesting --
 // tells the delegate when a new request comes in.
 @end
