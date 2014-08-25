@@ -1,10 +1,6 @@
 //
 //  OverAir.h
 //  OverAir
-//
-//  Created by Adam Jensen on 8/17/14.
-//
-//
 
 #import <Cocoa/Cocoa.h>
 
