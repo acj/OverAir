@@ -134,9 +134,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				645C12B619A140C500CF23B3 /* Util.h in Headers */,
+				645C12B219A13F2200CF23B3 /* AirPlayServer.h in Headers */,
 				645C12AA19A13B3900CF23B3 /* Constants.h in Headers */,
 				645C12AE19A13CA000CF23B3 /* TCPServer.h in Headers */,
-				645C12B219A13F2200CF23B3 /* AirPlayServer.h in Headers */,
 				645C128E19A13A4C00CF23B3 /* OverAir.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -353,7 +353,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = OverAir/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -370,7 +370,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = OverAir/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -428,6 +428,7 @@
 				645C12A019A13A4C00CF23B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		645C12A119A13A4C00CF23B3 /* Build configuration list for PBXNativeTarget "OverAirTests" */ = {
 			isa = XCConfigurationList;
@@ -436,6 +437,7 @@
 				645C12A319A13A4C00CF23B3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
