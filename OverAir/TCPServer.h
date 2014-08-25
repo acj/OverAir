@@ -64,7 +64,8 @@ typedef enum {
     uint16_t port;
     CFSocketRef ipv4socket;
     CFSocketRef ipv6socket;
-    NSNetService *netService;
+    NSNetService *netService; // AirPlay
+    NSNetService *raopNetService; // AirTunes
 }
 
 - (id)delegate;

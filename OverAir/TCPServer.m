@@ -247,7 +247,7 @@ static void TCPServerAcceptCallBack(CFSocketRef socket, CFSocketCallBackType typ
         // RAOP
         NSString *serviceNameWithMacAddress = [NSString stringWithFormat:@"%@@%@", [macAddress stringByReplacingOccurrencesOfString:@":" withString:@""], publishingName];
         
-        NSNetService *raopNetService = [[NSNetService alloc] initWithDomain:publishingDomain type:AirTunesServiceType name:serviceNameWithMacAddress port:AirTunesPort];
+        raopNetService = [[NSNetService alloc] initWithDomain:publishingDomain type:AirTunesServiceType name:serviceNameWithMacAddress port:AirTunesPort];
         
         NSDictionary *txtDictionaryRAOP = [NSDictionary dictionaryWithObjectsAndKeys:@"1", @"txtvers", @"2", @"ch", @"AppleTV3,2", @"am", @"1,2,3", @"cn", @"true", @"da", @"0,3,5", @"et", @"0,1,2", @"md", @"false", @"pw", @"false", @"sv", @"44100", @"sr", @"16", @"ss", @"UDP", @"tp", @"65537", @"vn", @"150.33", @"vs", @"0x4", @"sf", nil];
         
