@@ -3,6 +3,8 @@
 //  OverAir
 
 #import <Cocoa/Cocoa.h>
+#import "AirPlayServer.h"
+#import "Constants.h"
 
 //! Project version number for OverAir.
 FOUNDATION_EXPORT double OverAirVersionNumber;
