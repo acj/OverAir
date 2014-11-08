@@ -1,6 +1,6 @@
 #import "Constants.h"
 #import "AirPlayServer.h"
-#import "Util.h"
+#import "OAUtil.h"
 
 @implementation AirPlayServer
 
@@ -334,7 +334,7 @@
                              \t<key>srcvers</key>\n\
                              \t<string>101.28</string>\n\
                              </dict>\n\
-                             </plist>\n", [Util getMacAddressForInterface:UseNetworkInterface]] dataUsingEncoding: NSASCIIStringEncoding];
+                             </plist>\n", [OAUtil getMacAddressForInterface:UseNetworkInterface]] dataUsingEncoding: NSASCIIStringEncoding];
             
             
             CFHTTPMessageRef response = CFHTTPMessageCreateResponse(kCFAllocatorDefault, 200, NULL, kCFHTTPVersion1_1); // OK

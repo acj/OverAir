@@ -46,7 +46,7 @@
 
 #import "Constants.h"
 #import "TCPServer.h"
-#import "Util.h"
+#import "OAUtil.h"
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -225,7 +225,7 @@ static void TCPServerAcceptCallBack(CFSocketRef socket, CFSocketCallBackType typ
     
     // we can only publish the service if we have a type to publish with
     if (nil != type) {
-        NSString *macAddress = [Util getMacAddressForInterface:UseNetworkInterface];
+        NSString *macAddress = [OAUtil getMacAddressForInterface:UseNetworkInterface];
         
         NSString *publishingDomain = domain ? domain : @"";
         NSString *publishingName = nil;

@@ -7,9 +7,9 @@
 
 #define IFT_ETHER 0x6
 
-#import "Util.h"
+#import "OAUtil.h"
 
-@implementation Util
+@implementation OAUtil
 
 + (NSString *) getMacAddressForInterface:(NSString *)ifName {
     struct ifaddrs           *addrs;

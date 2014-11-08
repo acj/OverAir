@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@interface Util : NSObject
+@interface OAUtil : NSObject
 
 + (NSString *) getMacAddressForInterface:(NSString *)ifName;
 
