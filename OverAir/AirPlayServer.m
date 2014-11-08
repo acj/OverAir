@@ -105,9 +105,6 @@
 // should call again as the buffered bytes may have another complete
 // request available.
 - (BOOL)processIncomingBytes {
-    
-    NSLog(@"processIncomingBytes");
-    
     CFHTTPMessageRef working = CFHTTPMessageCreateEmpty(kCFAllocatorDefault, TRUE);
     CFHTTPMessageAppendBytes(working, [ibuffer bytes], [ibuffer length]);
     
@@ -243,8 +240,6 @@
 }
 
 - (void)stream:(NSStream *)stream handleEvent:(NSStreamEvent)streamEvent {
-    
-    
     switch(streamEvent) {
         case NSStreamEventHasBytesAvailable:;
             uint8_t buf[16 * 1024];
@@ -287,26 +282,7 @@
 - (void)performDefaultRequestHandling:(HTTPServerRequest *)mess {
     
     CFHTTPMessageRef request = [mess request];
-    
-    /*    NSString *vers = [(id)CFHTTPMessageCopyVersion(request) autorelease];
-     if (!vers) {
-     NSLog(@"Geen vers!!");
-     CFHTTPMessageRef response = CFHTTPMessageCreateResponse(kCFAllocatorDefault, 505, NULL, (CFStringRef)vers); // Version Not Supported
-     [mess setResponse:response];
-     CFRelease(response);
-     return;
-     } */
-    
     NSString *method = (__bridge id)CFHTTPMessageCopyRequestMethod(request);
-    /*   if (!method) {
-     NSLog(@"Geen method!!");
-     
-     CFHTTPMessageRef response = CFHTTPMessageCreateResponse(kCFAllocatorDefault, 400, NULL, kCFHTTPVersion1_1); // Bad Request
-     [mess setResponse:response];
-     CFRelease(response);
-     return;
-     }  */
-    
     NSDate *myDate = [NSDate date];
     NSString *date = [myDate descriptionWithCalendarFormat:@"%a %d %b %Y %H:%M:%S GMT" timeZone:nil locale:nil];
     NSURL *uri = (__bridge NSURL *)CFHTTPMessageCopyRequestURL(request);
@@ -357,8 +333,6 @@
         }
         if ([[uri relativeString] hasPrefix:@"/slideshow-features"])
         {
-            
-            
             /*<?xml version="1.0" encoding="UTF-8"?>
              <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
              <plist version="1.0">
@@ -408,7 +382,6 @@
         
         else if ([[uri relativeString] hasPrefix:@"/playback-info"])
         {
-            
             if (delegate && [delegate respondsToSelector:@selector(airPlayServerDidReceivePositionRequest:)]) {
                 _playPosition =  [delegate airPlayServerDidReceivePositionRequest:self.server];
             }
@@ -430,7 +403,6 @@
             
             NSData *data = [resp dataUsingEncoding: NSASCIIStringEncoding];
             
-            
             CFHTTPMessageRef response = CFHTTPMessageCreateResponse(kCFAllocatorDefault, 200, NULL, kCFHTTPVersion1_1); // OK
             CFHTTPMessageSetHeaderFieldValue(response, (CFStringRef)@"Date", (__bridge CFStringRef)[NSString stringWithFormat:@"%@",date]);
             CFHTTPMessageSetHeaderFieldValue(response, (CFStringRef)@"Content-Type", (__bridge CFStringRef)[NSString stringWithFormat:@"text/x-apple-plist+xml"]);
@@ -440,24 +412,17 @@
             [mess setResponse:response];
             CFRelease(response);
             
-            
             return;
-            
-            
-            
         }
         
     }
     else if ([method isEqual:@"POST"])
     {
-        
         NSURL *uri = (__bridge NSURL *)CFHTTPMessageCopyRequestURL(request);
         NSLog(@"(POST) URI : %@",uri);
         
         if ([[uri relativeString] hasPrefix:@"/reverse"])
         {
-            
-            
             CFHTTPMessageRef response = CFHTTPMessageCreateResponse(kCFAllocatorDefault, 101, NULL, kCFHTTPVersion1_1); // Switching Protocols
             CFHTTPMessageSetHeaderFieldValue(response, (CFStringRef)@"Date", (__bridge CFStringRef)[NSString stringWithFormat:@"%@",date]);
             CFHTTPMessageSetHeaderFieldValue(response, (CFStringRef)@"Upgrade", (__bridge CFStringRef)[NSString stringWithFormat:@"PTTH/1.0"]);
@@ -467,11 +432,9 @@
             CFRelease(response);
             
             return;
-            
         }
         else if ([[uri relativeString] hasPrefix:@"/play"])
         {
-            
             _playPosition = 0;
             NSData *Body = (__bridge NSData *)CFHTTPMessageCopyBody(request);
             NSString *bodyString = [[NSString alloc] initWithData:Body encoding:NSASCIIStringEncoding];
@@ -506,11 +469,10 @@
                 
             }
             else {
-                
                 NSString *error;
                 NSPropertyListFormat format;
                 NSDictionary* plist = [NSPropertyListSerialization propertyListFromData:Body mutabilityOption:NSPropertyListImmutable format:&format errorDescription:&error];
-                if(!plist){
+                if (!plist) {
                     NSLog(@"Error: %@",error);
                 }
                 else {
@@ -533,7 +495,6 @@
             CFHTTPMessageSetHeaderFieldValue(response, (CFStringRef)@"Date", (__bridge CFStringRef)date);
             CFHTTPMessageSetHeaderFieldValue(response, (CFStringRef)@"Upgrade", (__bridge CFStringRef)[NSString stringWithFormat:@"PTTH/1.0"]);
             CFHTTPMessageSetHeaderFieldValue(response, (CFStringRef)@"Connection", (__bridge CFStringRef)[NSString stringWithFormat:@"Upgrade"]);
-            //			CFHTTPMessageSetBody(response, (CFDataRef)data);
             [mess setResponse:response];
             CFRelease(response);
             
@@ -553,10 +514,8 @@
             return;
             
         }
-        
         else if ([[uri relativeString] hasPrefix:@"/rate?value="])
         {
-            
             if ([[uri relativeString] hasPrefix:@"/rate?value=1"])
             {
                 if (delegate && [delegate respondsToSelector:@selector(airPlayServer:didReceivePauseRequest:)]) {
@@ -569,13 +528,11 @@
                 }
             }
             
-            
             CFHTTPMessageRef response = CFHTTPMessageCreateResponse(kCFAllocatorDefault, 101, NULL, kCFHTTPVersion1_1); // Switching Protocols
             CFHTTPMessageSetHeaderFieldValue(response, (CFStringRef)@"Content-Type", (__bridge CFStringRef)[NSString stringWithFormat:@"text/x-apple-plist+xml"]);
             CFHTTPMessageSetHeaderFieldValue(response, (CFStringRef)@"Date", (__bridge CFStringRef)date);
             CFHTTPMessageSetHeaderFieldValue(response, (CFStringRef)@"Upgrade", (__bridge CFStringRef)[NSString stringWithFormat:@"PTTH/1.0"]);
             CFHTTPMessageSetHeaderFieldValue(response, (CFStringRef)@"Connection", (__bridge CFStringRef)[NSString stringWithFormat:@"Upgrade"]);
-            //			CFHTTPMessageSetBody(response, (CFDataRef)data);
             [mess setResponse:response];
             CFRelease(response);
             return;
@@ -583,8 +540,6 @@
         }
         else if ([[uri relativeString] hasPrefix:@"/scrub?position="])
         {
-            
-            
             NSString *seconds = [[uri absoluteString] substringFromIndex:16];
             
             NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
@@ -595,20 +550,17 @@
             
             if (delegate && [delegate respondsToSelector:@selector(airPlayServer:didReceiveScrubRequest:)]) {
                 [delegate airPlayServer:self.server didReceiveScrubRequest:[position floatValue]];
-            }					
-            
+            }
             
             CFHTTPMessageRef response = CFHTTPMessageCreateResponse(kCFAllocatorDefault, 200, NULL, kCFHTTPVersion1_1); // OK
             [mess setResponse:response];
             CFRelease(response);
             return;
-            
         }
         
     } // Einde POST
     else if ([method isEqual:@"PUT"])
     {
-        
         NSURL *uri = (__bridge NSURL *)CFHTTPMessageCopyRequestURL(request);
         NSLog(@"(PUT) URI : %@",uri);
         
@@ -634,7 +586,6 @@
         }
     }
     
-    NSLog(@"Always send 200 OK response, even if we did nothing :)");
     CFHTTPMessageRef response = CFHTTPMessageCreateResponse(kCFAllocatorDefault, 200, NULL, kCFHTTPVersion1_1); // OK
     //    CFHTTPMessageSetHeaderFieldValue(response, (CFStringRef)@"Date", (CFStringRef)@"Mon, 16 June 2014 21:32:00 GMT");
     //    CFHTTPMessageSetHeaderFieldValue(response, (CFStringRef)@"Content-Length", (CFStringRef)@"0");

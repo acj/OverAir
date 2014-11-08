@@ -111,9 +111,6 @@ NSString * const TCPServerErrorDomain = @"AirmacErrorDomain";
 }
 
 - (void)handleNewConnectionFromAddress:(NSData *)addr inputStream:(NSInputStream *)istr outputStream:(NSOutputStream *)ostr {
-    
-    NSLog(@"handleNewConnectionFromAddress");
-    
     // if the delegate implements the delegate method, call it
     if (delegate && [delegate respondsToSelector:@selector(TCPServer:didReceiveConnectionFromAddress:inputStream:outputStream:)]) {
         [delegate TCPServer:self didReceiveConnectionFromAddress:addr inputStream:istr outputStream:ostr];
