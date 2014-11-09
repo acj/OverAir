@@ -156,6 +156,7 @@
 @protocol AirPlayServerDelegate
 - (float)airPlayServerDidReceivePositionRequest:(AirPlayServer*)server;
 - (float)airPlayServerDidReceiveRateRequest:(AirPlayServer*)server;
+- (float)airPlayServerDidReceiveDurationRequest:(AirPlayServer*)server;
 - (void)airPlayServerDidReceiveStopRequest:(AirPlayServer*)server;
 - (void)airPlayServer:(AirPlayServer*)server didReceivePauseRequest:(BOOL)pause;
 - (void)airPlayServer:(AirPlayServer*)server didReceiveScrubRequest:(float)seconds;

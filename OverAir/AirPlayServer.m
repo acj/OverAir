@@ -390,16 +390,47 @@
                 _playRate =  [delegate airPlayServerDidReceiveRateRequest:self.server];
             }
             
+            float durationSeconds = 0.f;
+            if (delegate && [delegate respondsToSelector:@selector(airPlayServerDidReceiveDurationRequest:)]) {
+                durationSeconds = [delegate airPlayServerDidReceiveDurationRequest:self.server];
+            }
+            
             NSString *resp = [NSString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n \
-                              <!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n \
+                              <!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\"\n \
+                               \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n \
                               <plist version=\"1.0\">\n \
-                              <dict>\n \
-                              \t<key>duration</key>\n \
-                              \t<real>0.0</real>\n \
-                              \t<key>position</key>\n \
-                              \t<real>0.0</real>\n \
-                              </dict>\n \
-                              </plist>"];
+                               <dict>\n \
+                                <key>duration</key> <real>%f</real>\n \
+                                <key>loadedTimeRanges</key>\n \
+                                <array>\n \
+                                 <dict>\n \
+                                  <key>duration</key> <real>%f</real>\n \
+                                  <key>start</key> <real>%f</real>\n \
+                                 </dict>\n \
+                                </array>\n \
+                                <key>playbackBufferEmpty</key> <true/>\n \
+                                <key>playbackBufferFull</key> <false/>\n \
+                                <key>playbackLikelyToKeepUp</key> <true/>\n \
+                                <key>position</key> <real>%f</real>\n \
+                                <key>rate</key> <real>%f</real>\n \
+                                <key>readyToPlay</key> <true/>\n \
+                                <key>seekableTimeRanges</key>\n \
+                                <array>\n \
+                                 <dict>\n \
+                                  <key>duration</key>\n \
+                                  <real>%f</real>\n \
+                                  <key>start</key>\n \
+                                  <real>0.0</real>\n \
+                                 </dict>\n \
+                                </array>\n \
+                               </dict>\n \
+                              </plist>",
+                              durationSeconds,
+                              durationSeconds,
+                              0.f,
+                              _playPosition,
+                              _playRate,
+                              durationSeconds];
             
             NSData *data = [resp dataUsingEncoding: NSASCIIStringEncoding];
             
