@@ -2,10 +2,15 @@
 #import "AirPlayServer.h"
 #import "OAUtil.h"
 
+@interface AirPlayServer ()
+@property (strong, nonatomic) NSMutableArray* connections;
+@end
+
 @implementation AirPlayServer
 
 - (id)init {
     connClass = [HTTPConnection self];
+    self.connections = [NSMutableArray array];
     return self;
 }
 
@@ -25,6 +30,9 @@
     if ([self delegate] && [[self delegate] respondsToSelector:@selector(HTTPServer:didMakeNewConnection:)]) {
         [[self delegate] HTTPServer:self didMakeNewConnection:connection];
     }
+    
+    // FIXME: This will slowly leak connections.
+    [self.connections addObject:connection];
 }
 
 @end
