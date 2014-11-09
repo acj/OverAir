@@ -540,16 +540,17 @@
         }
         else if ([[uri relativeString] hasPrefix:@"/scrub?position="])
         {
-            NSString *seconds = [[uri absoluteString] substringFromIndex:16];
+            NSArray* const queryComponents = [[uri query] componentsSeparatedByString:@"="];
             
-            NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
-            [f setNumberStyle:NSNumberFormatterDecimalStyle];
-            NSNumber * position = [f numberFromString:seconds];
+            NSAssert(queryComponents.count == 2, @"Incorrect number of query components");
+            NSAssert([[queryComponents firstObject] isEqualToString:@"position"], @"Invalid query argument");
             
-            _playPosition = [position intValue]/1000000;
+            const float scrubToPosition = [queryComponents[1] floatValue];
+            
+            _playPosition = scrubToPosition;
             
             if (delegate && [delegate respondsToSelector:@selector(airPlayServer:didReceiveScrubRequest:)]) {
-                [delegate airPlayServer:self.server didReceiveScrubRequest:[position floatValue]];
+                [delegate airPlayServer:self.server didReceiveScrubRequest:scrubToPosition];
             }
             
             CFHTTPMessageRef response = CFHTTPMessageCreateResponse(kCFAllocatorDefault, 200, NULL, kCFHTTPVersion1_1); // OK
